@@ -1,9 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:motivation_notification/core/di/di_container.dart';
 import 'package:motivation_notification/core/navigation/navigation.dart';
 import 'package:motivation_notification/core/theme/theme.dart';
+import 'package:motivation_notification/feature/motivation/presentation/bloc/motivation_bloc.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await initializeDependencies();
+
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<MotivationBloc>(
+          create: (context) => singleton(),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
