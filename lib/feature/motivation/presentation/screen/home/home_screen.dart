@@ -6,7 +6,6 @@ import 'package:motivation_notification/feature/motivation/presentation/bloc/mot
 import 'package:motivation_notification/feature/motivation/presentation/bloc/motivation_state.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:workmanager/workmanager.dart';
-import '../../../../../core/task_manager/task_manager.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,7 +25,7 @@ class _HomeScreen extends State<HomeScreen> {
   @override
   void initState() {
     Workmanager()
-        .isScheduledByUniqueName(scheduleMotivationNotification)
+        .isScheduledByUniqueName("scheduleMotivationNotification")
         .then((onValue) => setState(() => _isTaskRegistered = onValue));
 
     super.initState();
@@ -132,10 +131,10 @@ class _HomeScreen extends State<HomeScreen> {
 
   void _scheduleOrCancelTask() {
     _isTaskRegistered
-        ? Workmanager().cancelByUniqueName(scheduleMotivationNotification)
+        ? Workmanager().cancelByUniqueName("scheduleMotivationNotification")
         : Workmanager().registerPeriodicTask(
-            scheduleMotivationNotification,
-            scheduleMotivationNotification,
+            "scheduleMotivationNotification",
+            "scheduleMotivationNotification",
             frequency: Duration(hours: 24),
             constraints: Constraints(
               networkType: NetworkType.connected,

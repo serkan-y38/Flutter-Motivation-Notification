@@ -10,12 +10,10 @@ import '../notification/local_notification_service.dart';
 import '../response/my_response.dart';
 import 'package:timezone/timezone.dart' as tz;
 
-const scheduleMotivationNotification = "scheduleMotivationNotification";
-
 @pragma("vm:entry-point")
 void myCallbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
-    if (task == scheduleMotivationNotification) {
+    if (task == "scheduleMotivationNotification") {
       WidgetsFlutterBinding.ensureInitialized();
       await LocalNotificationService().initializeNotification();
 
@@ -40,7 +38,7 @@ void myCallbackDispatcher() {
           "motivationNotificationChannel",
           response.data!.author.toString(),
           response.data!.quote.toString(),
-          (notificationTimeSecond > currentSecond)
+          notificationTimeSecond > currentSecond
               ? notificationTimeSecond - currentSecond
               : remainedSecond + notificationTimeSecond,
         );
