@@ -28,4 +28,5 @@ linter:
 # https://dart.dev/guides/language/analysis-options
 
 formatter:
-  page_width: 100
+  trailing_commas: preserve
+  page_width: 80

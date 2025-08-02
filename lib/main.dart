@@ -2,13 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:motivation_notification/core/di/di_container.dart';
 import 'package:motivation_notification/core/navigation/navigation.dart';
+import 'package:motivation_notification/core/notification/local_notification_service.dart';
 import 'package:motivation_notification/core/theme/theme.dart';
 import 'package:motivation_notification/feature/motivation/presentation/bloc/motivation_bloc.dart';
+import 'package:workmanager/workmanager.dart';
+import 'core/task_manager/task_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await initializeDependencies();
+  await LocalNotificationService().initializeNotification();
+
+  Workmanager().initialize(myCallbackDispatcher);
 
   runApp(
     MultiBlocProvider(
