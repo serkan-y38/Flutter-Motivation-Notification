@@ -68,6 +68,10 @@ class LocalNotificationService {
           chanelId,
           chanelName,
           channelDescription: 'notification',
+          styleInformation: BigTextStyleInformation(
+            body,
+            htmlFormatBigText: true,
+          ),
         ),
       ),
     );
